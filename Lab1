@@ -1,0 +1,64 @@
+using System;
+
+class Matrix
+{
+    private int[,] data;
+    private Random rnd = new Random();
+
+ 
+    public int N { get; set; }
+    public int A { get; set; }
+    public int B { get; set; }
+
+
+    public Matrix(int n, int a, int b)
+    {
+        N = n;
+        A = a;
+        B = b;
+        FillMatrix();
+    }
+
+    private void FillMatrix()
+    {
+        data = new int[N, N];
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                data[i, j] = rnd.Next(A, B + 1);
+    }
+
+
+    public void ShowMatrix()
+    {
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+                Console.Write(data[i, j] + "\t");
+            Console.WriteLine();
+        }
+    }
+
+
+    public int CountOdd()
+    {
+        int count = 0;
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                if (data[i, j] % 2 != 0)
+                    count++;
+        return count;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Matrix m = new Matrix(5, 1, 20);
+
+        Console.WriteLine("Matrix:");
+        m.ShowMatrix();
+
+        Console.WriteLine("Odd numbers count: " + m.CountOdd());
+    }
+}
